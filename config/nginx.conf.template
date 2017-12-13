@@ -175,6 +175,25 @@ http {
       proxy_pass http://${VISUALIZER_HOST}:${VISUALIZER_PORT}/;
     }
 
+    location /portainer/ {
+      access_by_lua_block {
+        validate_user();
+      }
+
+      include proxy_settings.conf;
+      proxy_set_header Connection "";
+      proxy_pass http://${PORTAINER_HOST}:${PORTAINER_PORT}/;
+    }
+
+    location /portainer/api/websocket/ {
+      access_by_lua_block {
+        validate_user();
+      }
+
+      include proxy_settings.conf;
+      proxy_pass http://${PORTAINER_HOST}:${PORTAINER_PORT}/api/websocket/;
+    }
+
     location /qix_session_service {
       internal; # only exposed internally, used during requests to /doc
       proxy_pass http://${QIX_SESSION_HOST}:${QIX_SESSION_PORT}/v1/session;
