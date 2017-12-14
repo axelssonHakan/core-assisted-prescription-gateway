@@ -60,7 +60,7 @@ function getJWTIfLoggedIn()
   end
 end
 
-function validate_user(redirect, keepHeader)
+function validate_user(redirect)
   local jwt = getJWTIfLoggedIn()
 
   if not jwt then
@@ -71,8 +71,8 @@ function validate_user(redirect, keepHeader)
     end
   end
 
-  if not keepHeader then
-    ngx.req.set_header("Authorization", "Bearer " .. jwt)
-    --ngx.req.clear_header("Cookie")
-  end
+  -- validate JWT?
+
+  ngx.req.set_header("Authorization", "Bearer " .. jwt)
+  --ngx.req.clear_header("Cookie")
 end

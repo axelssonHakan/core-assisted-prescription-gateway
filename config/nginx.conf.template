@@ -176,9 +176,6 @@ http {
     }
 
     location /portainer/ {
-      access_by_lua_block {
-        validate_user(true, false);
-      }
 
       include proxy_settings.conf;
       proxy_set_header Connection "";
@@ -186,9 +183,6 @@ http {
     }
 
     location /portainer/api/websocket/ {
-      access_by_lua_block {
-        validate_user(true, false);
-      }
 
       include proxy_settings.conf;
       proxy_pass http://${PORTAINER_HOST}:${PORTAINER_PORT}/api/websocket/;
