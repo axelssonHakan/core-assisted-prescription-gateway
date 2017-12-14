@@ -177,7 +177,7 @@ http {
 
     location /portainer/ {
       access_by_lua_block {
-        validate_user();
+        validate_user(true, false);
       }
 
       include proxy_settings.conf;
@@ -187,7 +187,7 @@ http {
 
     location /portainer/api/websocket/ {
       access_by_lua_block {
-        validate_user();
+        validate_user(true, false);
       }
 
       include proxy_settings.conf;
